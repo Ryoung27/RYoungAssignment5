@@ -1,67 +1,101 @@
-/* Practice Assignment 4:
+/* Practice Assignment 6:
 
 Complete this javascript file according to the individual instructions
 given in the comments. 
 
 *** DO NOT CHANGE any of the code that you are not instructed to. */
 
-// 1) Create a function named helloWorld that returns the exact phrase:
-// "Hello World!".
+// 1) Create an array named myPizzaOrder that cannot be reassigned and
+// contains the 3 elements: "Pepperoni", 12.99, false
+const myPizzaOrder = ["Pepperoni", 12.99, false];
 
-// You can create a one line function without return, if it's one line.
-const helloWorld = () => 'Hello World!';
-// 2) Create a function named greeting that will accept a "name" parameter
-// and return the string: "Hello, name." where "name" is replaced
-// with whatever value we want to provide when calling the function.
-
-// You can create a one line function without return, if it's one line.
-const greeting = (name) => "Hello, " + name + ".";
-
-// 3) Create a function named divisibleByThree that accepts a "number" parameter
-// and will return accurate boolean data depending on the value
-// of the "number" parameter. Hint: Try the modulus operator.
-
-const divisibleByThree = (number) => {
-    //Terniary to check if number modulo three equals zero.
-    //If number is divisible by 3 return true else false.
-    return number % 3 === 0 ? true : false;
-}
-// 4) Create a function named averageAge that accepts 3 parameters:
-// num1, num2, and num3. The function should return the average of
-// all three numbers, but the parameter num3 is missing, it should
-// return the average of num1 and num2. Returned results should be
-// rounded to the nearest integer. Hint: Use a Math method to round.
-const averageAge = (num1, num2, num3) => {
-    if(num1 && num2 && num3){
-        return Math.round(((num1+num2+num3)/3))
-    }else{
-        return Math.round(((num1+num2)/2))
-    }
+// 2) Create a function named getPizzaType that will accept an array
+// as a parameter and returns the 1st element from the array.
+const getPizzaType = (arr) => {
+    return arr[0];
 }
 
-// 5) Create a function named leetSpeak that accepts a word
-// as a parameter and returns the same word except all of the letter
-// e occurances (lower case only) are replaced by the number 3.
-// Replace any lower case a with the number 4, too.
-// Hints: You will use a loop. You will use conditionals.
-// Example: leet is returned as l33t. speak is returned as sp34k.
-const leetSpeak = (word) => {
-    //Create an empty array to store our new values.
-    let newWord = [];
-    //Turn our word into an array of letters and spread it.
-    //Then map over the letters in the array calling an ananoymous function.
-    [...word].map((letter) => {
-        //If the letter is e push to our empty arrary 3
-        if(letter === "e"){
-            newWord.push("3");
-            //If the letter is a push to our empty array 4.
-        }else if(letter === "a"){
-            newWord.push("4");
-        }else{
-            //Else push our letter.
-            newWord.push(letter);
+// 3) Create a function named addTax that will accept an array
+// like your myPizzaOrder array as a parameter. The function will
+// insert an element into the array between the 2nd and 3rd
+// element in the array that is equal to the 2nd element multiplied
+// by 0.0925 and rounded to the nearest penny (ie 0.95, 0.79, 0.42, etc).
+// The function should return the array.
+// ===========
+// Hint: find the method that will allow you to set the decimals.
+const addTax = (arr) => {
+    const addTaxToPizzaOrder = arr;
+    const taxValue = parseFloat((arr[1] * 0.0925).toFixed(2));
+    addTaxToPizzaOrder.splice(2, 0, taxValue);
+    return addTaxToPizzaOrder;
+}
+
+
+// 4) Create a function named completeOrder that will accept an array
+// as a parameter. The function will change the value of the 4th
+// element in the array to true and return the array.
+const completeOrder = (arr) => {
+    const myPizzaOrder = arr;
+    myPizzaOrder[myPizzaOrder.length -1] = true;
+    return myPizzaOrder;
+}
+
+// 5) Create a function named allTheNumbers that accepts a number as
+// a parameter. The function will create an array that contains all of
+// the numbers from 1 to whatever number the parameter is. The array
+// should not include the parameter number. The function returns
+// the array.
+const allTheNumbers = (numb) => {
+    const theNumbers = [...Array(numb).keys()];
+    theNumbers.shift();
+    return theNumbers;
+}
+
+// 6) Create a function named getEvens that accepts 2 parameters:
+// startNum and endNum. The function should return an array that
+// includes the even numbers from startNum to endNum. If the startNum
+// or endNum are even, they should be included in the returned array.
+const getEvens = (startNum, endNum) => {
+    const evenNums = [];
+    for (let i = startNum; i <= endNum; i++) {
+        if(i % 2 === 0){
+            evenNums.push(i);
         }
-    })
-    //Join our newWord array with no separator.
-    return newWord.join('');
+    }
+    return evenNums;
+}
+
+// 7) Create a function named getLastElement that accepts an array
+// as a parameter and returns the last element of the array. The
+// array can have any number of elements. The function should always
+// return the last element.
+const getLastElement = (arr) => {
+    return(arr[arr.length-1])
+}
+
+// 8) Create a function named combineArrays that accepts two arrays
+// as parameters and combines them into one array. The function
+// should return the new combined array.
+const combineArrays = (arr1, arr2) => {
+    const totalArray = arr1.concat(arr2);
+    return totalArray
+}
+
+// 9) Create a function named isPalindrome that accepts a string as
+// a parameter. The function will return true if the string is a
+// palindrome and false if the string is not. To check for a
+// palindrome, remove all spaces and set to lowercase. The string
+// will be identical both forward and reverse if it is a palindrome.
+// For example: Taco Cat is a palindrome. tacocat is the same both
+// forward and reverse.
+// ==========
+// Hints: There are several possible solutions for this. I use a
+// combination of string and array methods. You can turn the string
+// into an array, use arrays methods, and turn the array back into
+// a string. This is also a challenge on freeCodeCamp. Check the
+// help forums there if you get stuck!
+const isPalindrome = (stringToCheck) => {
+    let spacelessStringToCheck = stringToCheck.replace(/[^a-zA-Z0-9]/g, '');
+    let palindrome = spacelessStringToCheck.split('').reverse().join('');
+    return palindrome.toLowerCase() === spacelessStringToCheck.toLowerCase()
 }
